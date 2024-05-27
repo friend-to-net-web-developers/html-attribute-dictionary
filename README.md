@@ -1,2 +1,5 @@
-# html-attribute-dictionary
-A dictionary which extends Dictionary&lt;string,string> and provides html safety features
+# HTML Attribute Dictionary
+## Summary
+A dictionary which extends Dictionary&lt;string,string&gt; and provides html safety features
+
+## Usage
