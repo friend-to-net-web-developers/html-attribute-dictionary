@@ -1,4 +1,4 @@
-﻿namespace FriendsOfNetWebDevelopers.HtmlAttributeDictionary;
+﻿namespace FriendToNetWebDevelopers.HtmlAttributeDictionary;
 
 public static class HtmlAttributeDictionaryFactory
 {

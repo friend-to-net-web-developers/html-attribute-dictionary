@@ -1,11 +1,12 @@
-﻿using System.Dynamic;
+﻿using System.Collections.Immutable;
+using System.Dynamic;
 using System.Text.RegularExpressions;
 using System.Web;
 
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable BuiltInTypeReferenceStyle
 
-namespace FriendsOfNetWebDevelopers.HtmlAttributeDictionary;
+namespace FriendToNetWebDevelopers.HtmlAttributeDictionary;
 
 public partial class HtmlAttributeDictionary : Dictionary<string, string>, ICloneable
 {
@@ -57,10 +58,10 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
             switch (attribute)
             {
                 case IdAttribute:
-                    SetId(attribute);
+                    SetId(value);
                     break;
                 case ClassAttribute:
-                    ForceSetClasses(attribute);
+                    ForceSetClasses(value);
                     break;
                 case DisabledAttribute:
                     if (string.IsNullOrEmpty(value))
@@ -192,7 +193,7 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
     /// </summary>
     /// <param name="classes"></param>
     /// <returns></returns>
-    public bool ForceSetClasses(string? classes) => SetAttributeDiscardNullOrEmpty(ClassAttribute, classes);
+    internal bool ForceSetClasses(string? classes) => SetAttributeDiscardNullOrEmpty(ClassAttribute, classes);
     
     
     /// <summary>
@@ -227,6 +228,17 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
     }
 
     /// <summary>
+    /// Retrieves a set of class strings as stored in the class attribute
+    /// </summary>
+    /// <returns>ISet of class strings</returns>
+    public ISet<string> GetClasses()
+    {
+        return !TryGetValue(ClassAttribute, out var classesRaw) 
+            ? [] 
+            : new SortedSet<string>(classesRaw.Split(' '));
+    }
+
+    /// <summary>
     /// Remove multiple classes (space-delimited) from the existing list of classes
     /// </summary>
     /// <param name="classes"></param>
@@ -251,6 +263,8 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
             allClasses.RemoveAt(i);
             classesRemoved++;
         }
+
+        ForceSetClasses(string.Join(' ', allClasses));
         return classesRemoved;
     }
 
@@ -271,7 +285,7 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
 
     #region Role Attribute
 
-    public void SetRole(string? role) => SetAttributeDiscardNullOrEmpty(RoleAttribute, role);
+    public bool SetRole(string? role) => SetAttributeDiscardNullOrEmpty(RoleAttribute, role);
 
     public void RemoveRole() => Remove(RoleAttribute);
 
@@ -536,10 +550,10 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
         return _validHtmlAttributes.Contains(attribute);
     }
 
-    [GeneratedRegex("^[a-zA-Z][a-zA-Z0-9\\-][a-z-A-Z0-9]*$")]
+    [GeneratedRegex("^[a-zA-Z][a-zA-Z0-9\\-]*[a-z-A-Z0-9]$")]
     private static partial Regex HtmlAttributeInternalRegex();
-    [GeneratedRegex("^[a-zA-Z][a-zA-Z0-9_\\-][a-zA-Z0-9]*$")]
+    [GeneratedRegex("^[a-zA-Z][a-zA-Z0-9_\\-]*[a-zA-Z0-9]$")]
     private static partial Regex HtmlIdValueInternalRegex();
-    [GeneratedRegex("^[a-zA-Z0-9][a-zA-Z0-9_\\-][a-zA-Z0-9]*$")]
+    [GeneratedRegex("^[a-zA-Z0-9][a-zA-Z0-9_\\-]*[a-zA-Z0-9]$")]
     private static partial Regex HtmlSingleClassValueInternalRegex();
 }
