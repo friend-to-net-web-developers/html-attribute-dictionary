@@ -10,7 +10,6 @@
         <Authors>Christopher Goehrs via FriendToNetWebDevelopers</Authors>
         <Description>A helper for those who need to dynamically generate an html tag safely</Description>
         <Copyright>2024</Copyright>
-        <PackageLicenseUrl>https://github.com/friend-to-net-web-developers/html-attribute-dictionary/blob/main/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/friend-to-net-web-developers/html-attribute-dictionary</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
         <PackageTags>html,attributes</PackageTags>
@@ -18,6 +17,14 @@
         <Company>FriendToNetWebDevelopers</Company>
         <AssemblyVersion>1.0.1</AssemblyVersion>
         <FileVersion>1.0.1</FileVersion>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
     </PropertyGroup>
+
+    <ItemGroup>
+      <None Include="..\LICENSE">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+    </ItemGroup>
 
 </Project>
