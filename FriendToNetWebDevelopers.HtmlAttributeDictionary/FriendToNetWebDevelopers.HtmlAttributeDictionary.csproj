@@ -4,6 +4,20 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Version>1.0.1</Version>
+        <Title>Html Attribute Dictionary</Title>
+        <Authors>Christopher Goehrs via FriendToNetWebDevelopers</Authors>
+        <Description>A helper for those who need to dynamically generate an html tag safely</Description>
+        <Copyright>2024</Copyright>
+        <PackageLicenseUrl>https://github.com/friend-to-net-web-developers/html-attribute-dictionary/blob/main/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/friend-to-net-web-developers/html-attribute-dictionary</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
+        <PackageTags>html,attributes</PackageTags>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <Company>FriendToNetWebDevelopers</Company>
+        <AssemblyVersion>1.0.1</AssemblyVersion>
+        <FileVersion>1.0.1</FileVersion>
     </PropertyGroup>
 
 </Project>
