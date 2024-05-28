@@ -151,4 +151,68 @@ public class ClassTests
         Assert.That(removedOkay);
         Assert.That(dictionary, Is.Empty);
     }
+
+    [Test]
+    public void AddClasses_MultipleOf2()
+    {
+        var dictionary = HtmlAttributeDictionaryFactory.Get();
+        Assert.That(dictionary, Is.Empty);
+        var okay = dictionary.AddClasses("foo foo foo bar bar bar");
+        Assert.That(okay, Is.EqualTo(6));
+        Assert.That(dictionary["class"], Is.EqualTo("foo foo foo bar bar bar"));
+        var classes = dictionary.GetClasses();
+        Assert.That(classes, Has.Count.EqualTo(2));
+    }
+    
+    [Test]
+    public void RemoveClassesFromClassAttribute_AddMultipleOf2_RemoveMultipleOf1()
+    {
+        var dictionary = HtmlAttributeDictionaryFactory.Get();
+        Assert.That(dictionary, Is.Empty);
+        var okay = dictionary.AddClasses("foo bar foo bar foo bar");
+        Assert.That(okay, Is.EqualTo(6));
+        Assert.That(dictionary["class"], Is.EqualTo("foo bar foo bar foo bar"));
+        var classes = dictionary.GetClasses();
+        Assert.That(classes, Has.Count.EqualTo(2));
+        okay = dictionary.RemoveClassesFromClassAttribute("foo");
+        Assert.That(okay, Is.EqualTo(3));
+        classes = dictionary.GetClasses();
+        Assert.That(classes, Has.Count.EqualTo(1));
+        Assert.That(dictionary["class"], Is.EqualTo("bar bar bar"));
+    }
+    
+    [Test]
+    public void RemoveClassesFromClassAttribute_AddMultipleOf2_Remove1WhichHasMultiple()
+    {
+        var dictionary = HtmlAttributeDictionaryFactory.Get();
+        Assert.That(dictionary, Is.Empty);
+        var okay = dictionary.AddClasses("foo bar foo bar foo bar");
+        Assert.That(okay, Is.EqualTo(6));
+        Assert.That(dictionary["class"], Is.EqualTo("foo bar foo bar foo bar"));
+        var classes = dictionary.GetClasses();
+        Assert.That(classes, Has.Count.EqualTo(2));
+        okay = dictionary.RemoveClassesFromClassAttribute("foo", 1);
+        Assert.That(okay, Is.EqualTo(1));
+        classes = dictionary.GetClasses();
+        Assert.That(classes, Has.Count.EqualTo(2));
+        Assert.That(dictionary["class"], Is.EqualTo("foo bar foo bar bar"));
+    }
+    
+    [Test]
+    public void RemoveClassesFromClassAttribute_AddMultipleOf2_Remove2WhichHasMultiple()
+    {
+        var dictionary = HtmlAttributeDictionaryFactory.Get();
+        Assert.That(dictionary, Is.Empty);
+        var okay = dictionary.AddClasses("foo bar foo bar foo bar");
+        Assert.That(okay, Is.EqualTo(6));
+        Assert.That(dictionary["class"], Is.EqualTo("foo bar foo bar foo bar"));
+        var classes = dictionary.GetClasses();
+        Assert.That(classes, Has.Count.EqualTo(2));
+        okay = dictionary.RemoveClassesFromClassAttribute("foo", 2);
+        Assert.That(okay, Is.EqualTo(2));
+        classes = dictionary.GetClasses();
+        Assert.That(classes, Has.Count.EqualTo(2));
+        Assert.That(dictionary["class"], Is.EqualTo("foo bar bar bar"));
+    }
+    
 }

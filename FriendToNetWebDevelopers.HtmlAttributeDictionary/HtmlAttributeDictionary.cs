@@ -201,7 +201,7 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
     /// </summary>
     /// <param name="multipleClasses"></param>
     /// <returns>The number of classes added</returns>
-    public int AddClasses(string? multipleClasses)
+    public uint AddClasses(string? multipleClasses)
         => string.IsNullOrWhiteSpace(multipleClasses) ? 0 : AddClasses(multipleClasses.Split(' '));
     
     /// <summary>
@@ -209,8 +209,8 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
     /// </summary>
     /// <param name="classes"></param>
     /// <returns>The number of classes added</returns>
-    public int AddClasses(ICollection<string> classes)
-        => classes.Count == 0 ? 0 : classes.Count(AddClassToClassAttribute);
+    public uint AddClasses(ICollection<string> classes)
+        => classes.Count == 0 ? 0 : (uint) classes.Count(AddClassToClassAttribute);
 
     /// <summary>
     /// Safely add a single class to the classes attribute
@@ -242,23 +242,26 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
     /// Remove multiple classes (space-delimited) from the existing list of classes
     /// </summary>
     /// <param name="classes"></param>
+    /// <param name="limit">0 = No Limit | greater than 0 = Limit to a certain number </param>
     /// <returns>The number actually removed</returns>
-    public int RemoveClassesFromClassAttribute(string? classes)
-        => string.IsNullOrWhiteSpace(classes) ? 0 : RemoveClassesFromClassAttribute(classes.Split(' '));
-    
+    public uint RemoveClassesFromClassAttribute(string? classes, uint limit = 0)
+        => string.IsNullOrWhiteSpace(classes) ? 0 : RemoveClassesFromClassAttribute(classes.Split(' '), limit);
+
     /// <summary>
     /// Remove multiple classes from the existing list of classes
     /// </summary>
     /// <param name="classesToRemove"></param>
+    /// <param name="limit">0 = No Limit | greater than 0 = Limit to a certain number </param>
     /// <returns>The number actually removed</returns>
-    public int RemoveClassesFromClassAttribute(ICollection<string> classesToRemove)
+    public uint RemoveClassesFromClassAttribute(ICollection<string> classesToRemove, uint limit = 0)
     {
         if (classesToRemove.Count == 0) return 0;
         if (!TryGetValue(ClassAttribute, out var classesRaw)) return 0;
         var allClasses = classesRaw.Split(' ').ToList();
-        var classesRemoved = 0;
+        uint classesRemoved = 0;
         for (var i = allClasses.Count - 1; i >= 0; i--)
         {
+            if (limit > 0 && classesRemoved >= limit) break;
             if (!classesToRemove.Contains(allClasses[i])) continue;
             allClasses.RemoveAt(i);
             classesRemoved++;
@@ -314,15 +317,13 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
     #region Type Conversion Methods
     public object ToObject()
     {
-        var expandoObj = new ExpandoObject();
-        ICollection<KeyValuePair<string, object>> expandoObjCollection =
-            (ICollection<KeyValuePair<String, Object>>)expandoObj;
+        ICollection<KeyValuePair<string, object?>> expandoObjCollection = new ExpandoObject();
         foreach (var (key, value) in this)
         {
-            expandoObjCollection.Add(new KeyValuePair<string, object>(key, value));
+            expandoObjCollection.Add(new KeyValuePair<string, object?>(key, value));
         }
 
-        dynamic eoDynamic = expandoObj;
+        dynamic eoDynamic = (ExpandoObject)expandoObjCollection;
         return eoDynamic;
     }
 
