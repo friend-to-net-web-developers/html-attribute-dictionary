@@ -25,6 +25,9 @@
         <Pack>True</Pack>
         <PackagePath>\</PackagePath>
       </None>
+      <None Update="package-icon.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
