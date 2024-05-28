@@ -2,6 +2,8 @@
 ## Summary
 A dictionary which extends Dictionary&lt;string,string&gt; and provides html attribute and value safety features.
 
+Some of these can change regularly.  Please see the [CHANGELOG.md](https://github.com/friend-to-net-web-developers/html-attribute-dictionary/blob/main/CHANGELOG.md) file for more details.
+
 ## Installation
 `Install-Package FriendToNetWebDevelopers.HtmlAttributeDictionary`
 
