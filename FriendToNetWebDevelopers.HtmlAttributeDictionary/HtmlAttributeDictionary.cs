@@ -2,6 +2,7 @@
 using System.Dynamic;
 using System.Text.RegularExpressions;
 using System.Web;
+#pragma warning disable CS8619 // Nullability of reference types in value doesn't match target type.
 
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable BuiltInTypeReferenceStyle
