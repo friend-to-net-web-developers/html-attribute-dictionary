@@ -317,15 +317,13 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
     #region Type Conversion Methods
     public object ToObject()
     {
-        var expandoObj = new ExpandoObject();
-        ICollection<KeyValuePair<string, object>> expandoObjCollection =
-            (ICollection<KeyValuePair<String, Object>>)expandoObj;
+        ICollection<KeyValuePair<string, object?>> expandoObjCollection = new ExpandoObject();
         foreach (var (key, value) in this)
         {
-            expandoObjCollection.Add(new KeyValuePair<string, object>(key, value));
+            expandoObjCollection.Add(new KeyValuePair<string, object?>(key, value));
         }
 
-        dynamic eoDynamic = expandoObj;
+        dynamic eoDynamic = (ExpandoObject)expandoObjCollection;
         return eoDynamic;
     }
 

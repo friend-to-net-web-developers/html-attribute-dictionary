@@ -3,9 +3,16 @@
 A dictionary which extends Dictionary&lt;string,string&gt; and provides html attribute and value safety features.
 
 ## Installation
-`NuGet\Install-Package FriendToNetWebDevelopers.HtmlAttributeDictionary -Version 1.0.1`
+`Install-Package FriendToNetWebDevelopers.HtmlAttributeDictionary`
 
 ## Usage
+Add the following to your _ViewImports.cshtml
+
+```
+@using FriendToNetWebDevelopers.HtmlAttributeDictionary
+@addTagHelper *, FriendToNetWebDevelopers.HtmlAttributeDictionary
+```
+
 This is the simplest use case I could come up with.
 
 ```
@@ -20,7 +27,7 @@ This is the simplest use case I could come up with.
 }
 <section>
     <!-- Produces the div for the hero with or without the "hero-scrim" class, as needed. -->
-    <div @Html.Raw(dictionary)>
+    <div html-attributes="dictionary">
         <!-- ... -->
     </div>
 </section>
