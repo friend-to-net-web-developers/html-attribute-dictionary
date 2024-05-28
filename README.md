@@ -6,6 +6,8 @@ A dictionary which extends Dictionary&lt;string,string&gt; and provides html att
 `Install-Package FriendToNetWebDevelopers.HtmlAttributeDictionary`
 
 ## Usage
+### How?
+
 Add the following to your _ViewImports.cshtml
 
 ```
@@ -51,7 +53,7 @@ This is the simplest use case I could come up with.
     </div>
 </section>
 ```
-But can be initialized in this way as well
+But can be initialized in the following ways as well.
 ```csharp
 //Provides an empty dictionary
 var dictionary = HtmlAttributeDictionaryFactory.Get();
@@ -68,10 +70,20 @@ var list = new KeyValuePair<string,string>();
 dictionary = new HtmlAttributeDictionary(list);
 ```
 
+While I like using the factory when producing the attribute dictionary inline, that's just because of the shortcuts
+  it provides.  This can be produced entirely dynamically and still work.
+
+### Why?
 
 This keeps things simple and safe.  It even allows for data to come in from an unsafe source and be safe to display.
 
 It even prevents invalid attributes from being added.
+
+# What if there's a problem
+
+Please feel free to report any issues [here](https://github.com/friend-to-net-web-developers/html-attribute-dictionary/issues) on GitHub.
+
+Include as many details as possible and one of us will check it out.
 
 # Thanks
 
@@ -80,7 +92,7 @@ A big thank you to Joshua Hess for his initial review and contribution of the Ta
 ![Heartland Business Systems Logo](https://cdn-ilaepil.nitrocdn.com/lwEpTzOpowNrpEQtaopWrEAXNdUgLLes/assets/images/optimized/rev-64f2520/www.hbs.net/wp-content/uploads/2022/11/HBS-website-logo.png)
 
 I would also like to extend my gratitude to my employer, [Heartland Business Systems](https://www.hbs.net), for putting me in a position to help
- others with this library.  They've supported me in creating this work and share it openly with .NET Web Developers everywhere.
+ others by providing this helper library to others free of charge.  They've supported me in creating this work and share it openly with .NET Web Developers everywhere.
 
 # License Information
 
