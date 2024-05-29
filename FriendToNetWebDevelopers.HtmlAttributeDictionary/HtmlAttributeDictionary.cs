@@ -2,6 +2,8 @@
 using System.Dynamic;
 using System.Text.RegularExpressions;
 using System.Web;
+using FriendToNetWebDevelopers.HtmlAttributeDictionary.Models;
+
 #pragma warning disable CS8619 // Nullability of reference types in value doesn't match target type.
 
 // ReSharper disable MemberCanBePrivate.Global
@@ -15,6 +17,7 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
     private const string ClassAttribute = "class";
     private const string DisabledAttribute = "disabled";
     private const string RoleAttribute = "role";
+    private const string StyleAttribute = "style";
 
     private const string DataAttributePrefix = "data-";
     private const string AriaAttributePrefix = "aria-";
@@ -65,18 +68,13 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
                     ForceSetClasses(value);
                     break;
                 case DisabledAttribute:
-                    if (string.IsNullOrEmpty(value))
-                    {
-                        RemoveDisabled();
-                    }
-                    else
-                    {
-                        SetDisabled();
-                    }
-
+                    SetDisabled();
                     break;
                 case RoleAttribute:
                     SetRole(value);
+                    break;
+                case StyleAttribute:
+                    SetStyleAttribute(value);
                     break;
                 default:
                     SetAttributeDiscardNullOrEmpty(attribute, value);
@@ -295,6 +293,95 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
 
     #endregion
 
+    #region Style Attribute
+
+    /// <summary>
+    /// Retrieves a style attribute dictionary which represents the contents of the style attribute
+    /// </summary>
+    /// <returns></returns>
+    public StyleAttributeDictionary GetStyleAttribute()
+        => TryGetValue(StyleAttribute, out var rawStyleAttribute) 
+            ? new StyleAttributeDictionary(rawStyleAttribute) 
+            : new StyleAttributeDictionary();
+
+    /// <summary>
+    /// Replaces the style attribute with a new set of declarations
+    /// </summary>
+    /// <param name="declarations"></param>
+    /// <returns>Tuple:
+    ///     <br/>Item1 = was the html attribute set okay?
+    ///     <br/>Item2 = how many declarations exist in the style declarations
+    /// </returns>
+    public Tuple<bool, int> SetStyleAttribute(StyleAttributeDictionary declarations)
+        => new(SetAttributeDiscardNullOrEmpty(StyleAttribute, declarations.ToString()),
+            declarations.Count);
+    
+
+    /// <summary>
+    /// Replaces the style attribute with a new set of declarations
+    /// </summary>
+    /// <param name="declarations">A raw string with css declarations</param>
+    /// <returns>Tuple:
+    ///     <br/>Item1 = was the html attribute set okay?
+    ///     <br/>Item2 = how many declarations exist in the style declarations?
+    /// </returns>
+    public Tuple<bool, int> SetStyleAttribute(string? declarations)
+        => SetStyleAttribute(new StyleAttributeDictionary(declarations));
+    
+    /// <summary>
+    /// Convenince method to add "display:none" to the style attribute
+    /// </summary>
+    /// <returns>Tuple:
+    ///     <br/>Item1 = was the html attribute set okay?
+    ///     <br/>Item2 = how many declarations were added or replaced?
+    ///     <br/>Item3 = how many declarations exist in the style declarations?
+    /// </returns>
+    public Tuple<bool, uint, int> AddDisplayNoneToStyle()
+        => AddToStyleAttribute("display:none;");
+    
+    /// <summary>
+    /// Adds or replaces the specified declarations to the existing style tag.
+    /// </summary>
+    /// <param name="declarations">A raw string with css declarations</param>
+    /// <returns>Tuple:
+    ///     <br/>Item1 = was the html attribute set okay?
+    ///     <br/>Item2 = how many declarations were added or replaced?
+    ///     <br/>Item3 = how many declarations exist in the style declarations?
+    /// </returns>
+    public Tuple<bool, uint, int> AddToStyleAttribute(string? declarations)
+    {
+        var atr = GetStyleAttribute();
+        var addedOkay = atr.SetDeclarations(declarations);
+        var setResults = SetStyleAttribute(atr);
+        return new Tuple<bool, uint, int>(setResults.Item1, addedOkay, setResults.Item2);
+    }
+
+    /// <summary>
+    /// Removes the specified declarations names in the existing style tag.
+    /// </summary>
+    /// <param name="declarationNames">A set of declaration names</param>
+    /// <returns>Tuple:
+    ///     <br/>Item1 = was the html attribute set okay?
+    ///     <br/>Item2 = how many declarations were removed?
+    ///     <br/>Item3 = how many declarations exist in the style declarations?
+    /// </returns>
+    public Tuple<bool, uint, int> RemoveDeclarationsFromStyleAttribute(ISet<string> declarationNames)
+    {
+        var atr = GetStyleAttribute();
+        var removedOkay = atr.RemoveDeclarations(declarationNames);
+        var setResults = SetStyleAttribute(atr);
+        return new Tuple<bool, uint, int>(setResults.Item1, removedOkay, setResults.Item2);
+    }
+    
+    /// <summary>
+    /// Removes the style attribute
+    /// </summary>
+    /// <returns>Was the style attribute removed okay?</returns>
+    public bool RemoveStyleAttribute()
+        => Remove(StyleAttribute);
+
+    #endregion
+    
     #region Data Attributes Convenience Methods
 
     public bool SetData(string attributeSuffix, string? value)
