@@ -1,13 +1,5 @@
-﻿using Microsoft.AspNetCore.Html;
+﻿using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using NUnit.Framework.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace FriendToNetWebDevelopers.HtmlAttributeDictionary.Test
 {
@@ -31,12 +23,13 @@ namespace FriendToNetWebDevelopers.HtmlAttributeDictionary.Test
                 { "html-attributes", tagHelper.HtmlAttributes },
             };
 
-            var tagHelperContext = new TagHelperContext(attributes, new Dictionary<object, object>(), nameof(HtmlAttributeTagHelper));
+            var tagHelperContext = new TagHelperContext(attributes, new Dictionary<object, object>(),
+                nameof(HtmlAttributeTagHelper));
 
             var output = new TagHelperOutput(
                 "div",
                 [],
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: null))
+                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: new DefaultTagHelperContent()))
             {
                 TagMode = TagMode.StartTagAndEndTag,
             };
