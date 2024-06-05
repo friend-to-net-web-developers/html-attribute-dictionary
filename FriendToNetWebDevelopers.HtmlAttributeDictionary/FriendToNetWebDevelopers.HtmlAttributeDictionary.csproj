@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.2.0</Version>
+        <Version>1.2.1</Version>
         <Title>Html Attribute Dictionary</Title>
         <Authors>Christopher Goehrs via FriendToNetWebDevelopers</Authors>
         <Description>A helper for those who need to dynamically generate an html tag safely</Description>
@@ -14,10 +14,11 @@
         <RepositoryType>Git</RepositoryType>
         <PackageTags>html,attributes,tag helper</PackageTags>
         <Company>FriendToNetWebDevelopers</Company>
-        <AssemblyVersion>1.2.0</AssemblyVersion>
-        <FileVersion>1.2.0</FileVersion>
+        <AssemblyVersion>1.2.1</AssemblyVersion>
+        <FileVersion>1.2.1</FileVersion>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageIcon>icon.png</PackageIcon>
+        <PackageReleaseNotes>Added ability to use on openeing tag only</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
@@ -25,7 +26,7 @@
         <Pack>True</Pack>
         <PackagePath>\</PackagePath>
       </None>
-        <None Include="icon.png" Pack="true" PackagePath=""/>
+        <None Include="icon.png" Pack="true" PackagePath="" />
     </ItemGroup>
 
     <ItemGroup>
