@@ -5,7 +5,7 @@ namespace FriendToNetWebDevelopers.HtmlAttributeDictionary
     /// <summary>
     /// Allow the html-attributes attribute to be used on any html tag
     /// </summary>
-    [HtmlTargetElement(Attributes = "html-attributes", ParentTag = null, TagStructure = TagStructure.NormalOrSelfClosing)]
+    [HtmlTargetElement(Attributes = "html-attributes", ParentTag = null, TagStructure = TagStructure.NormalOrSelfClosing | TagStructure.WithoutEndTag)]
     public class HtmlAttributeTagHelper : TagHelper
     {
         [HtmlAttributeName("html-attributes")]
