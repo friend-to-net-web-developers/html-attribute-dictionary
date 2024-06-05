@@ -6,6 +6,10 @@
 - .Net 8.0
 - Microsoft.AspNetCore.Razor (as of 1.1.0)
 
+## 1.2.1 (2024-06-05)
+
+Changed tag helper to work with both `TagStructure.NormalOrSelfClosing` and `TagStructure.WithoutEndTag`. 
+
 ## 1.2.0 (2024-05-29)
 
 Added style attribute management to the HtmlAttributeDictionary.
