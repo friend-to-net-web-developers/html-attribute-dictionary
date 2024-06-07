@@ -19,6 +19,7 @@
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageIcon>icon.png</PackageIcon>
         <PackageReleaseNotes>Added ability to use on openeing tag only</PackageReleaseNotes>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -31,5 +32,11 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.AspNetCore.Razor" Version="2.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\README.md" Pack="true" PackagePath="\">
+        <Link>README.md</Link>
+      </Content>
     </ItemGroup>
 </Project>
