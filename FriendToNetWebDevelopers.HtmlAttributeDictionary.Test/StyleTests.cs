@@ -1,4 +1,6 @@
-﻿namespace FriendToNetWebDevelopers.HtmlAttributeDictionary.Test;
+﻿using FriendToNetWebDevelopers.HtmlAttributeDictionary.Models;
+
+namespace FriendToNetWebDevelopers.HtmlAttributeDictionary.Test;
 
 [TestFixture]
 public class StyleTests
@@ -9,12 +11,45 @@ public class StyleTests
         var dictionary = HtmlAttributeDictionaryFactory.Get();
         Assert.That(dictionary, Is.Empty);
         var okay = dictionary.SetStyleAttribute("display:none;");
-        Assert.That(okay, Is.EqualTo(new Tuple<bool,int>(true,1)));
-        Assert.That(dictionary, Is.Not.Empty);
+        Assert.Multiple(() =>
+        {
+            Assert.That(okay, Is.EqualTo(new Tuple<bool, int>(true, 1)));
+            Assert.That(dictionary, Is.Not.Empty);
+        });
         var declarations = dictionary.GetStyleAttribute();
         Assert.That(declarations, Is.Not.Empty);
-        Assert.That(declarations.ContainsKey("display"));
-        Assert.That(declarations.ToString(), Is.EqualTo("display:none;"));
+        Assert.Multiple(() =>
+        {
+            Assert.That(declarations.ContainsKey("display"));
+            Assert.That(declarations.ToString(), Is.EqualTo("display:none;"));
+            Assert.That(declarations["display"], Is.EqualTo("none"));
+        });
+    }
+
+    [Test]
+    public void SetStyle_Individual()
+    {
+        var dictionary = HtmlAttributeDictionaryFactory.Get();
+        Assert.That(dictionary, Is.Empty);
+        var styleAttribute = dictionary.GetStyleAttribute();
+        Assert.That(styleAttribute, Is.Empty);
+        Assert.That(styleAttribute.SetDeclaration("display:none"));
+        dictionary.SetStyleAttribute(styleAttribute);
+        Assert.That(dictionary["style"], Is.EqualTo("display:none;"));
+    }
+    
+    [Test]
+    public void SetStyle_FromDictionary()
+    {
+        var dictionary = HtmlAttributeDictionaryFactory.Get();
+        Assert.That(dictionary, Is.Empty);
+        var styleAttributes = new Dictionary<string, string>
+        {
+            ["display"] = "none"
+        };
+        var styleAttribute = new StyleAttributeDictionary(styleAttributes);
+        dictionary.SetStyleAttribute(styleAttribute);
+        Assert.That(dictionary["style"], Is.EqualTo("display:none;"));
     }
     
     [Test]
@@ -23,8 +58,11 @@ public class StyleTests
         var dictionary = HtmlAttributeDictionaryFactory.Get();
         Assert.That(dictionary, Is.Empty);
         var okay = dictionary.SetStyleAttribute("display:none;color:#111111;");
-        Assert.That(okay, Is.EqualTo(new Tuple<bool,int>(true,2)));
-        Assert.That(dictionary, Is.Not.Empty);
+        Assert.Multiple(() =>
+        {
+            Assert.That(okay, Is.EqualTo(new Tuple<bool, int>(true, 2)));
+            Assert.That(dictionary, Is.Not.Empty);
+        });
         var declarations = dictionary.GetStyleAttribute();
         Assert.That(declarations, Is.Not.Empty);
         Assert.Multiple(() =>
@@ -93,10 +131,13 @@ public class StyleTests
         });
         Assert.That(dictionary.ToString(), Is.EqualTo("style=\"color:white;\""));
         var result = dictionary.RemoveStyleAttribute();
-        Assert.That(result);
-        Assert.That(dictionary.ToString(), Is.EqualTo(string.Empty));
+        Assert.Multiple(() =>
+        {
+            Assert.That(result);
+            Assert.That(dictionary.ToString(), Is.EqualTo(string.Empty));
+        });
     }
-    
+
     [Test]
     public void RemoveStyles_Add3_Remove_1Valid_1Missing()
     {

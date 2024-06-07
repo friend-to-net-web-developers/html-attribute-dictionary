@@ -70,20 +70,26 @@ public class IdRoleDisabledTests
         var dictionary = HtmlAttributeDictionaryFactory.Get();
         Assert.That(dictionary, Is.Empty);
         var okay = dictionary.SetRole(string.Empty);
-        Assert.That(okay, Is.False);
-        Assert.That(dictionary, Is.Empty);
+        Assert.Multiple(() =>
+        {
+            Assert.That(okay, Is.False);
+            Assert.That(dictionary, Is.Empty);
+        });
     }
-    
+
     [Test]
     public void RoleSetNull()
     {
         var dictionary = HtmlAttributeDictionaryFactory.Get();
         Assert.That(dictionary, Is.Empty);
         var okay = dictionary.SetRole(null);
-        Assert.That(okay, Is.False);
-        Assert.That(dictionary, Is.Empty);
+        Assert.Multiple(() =>
+        {
+            Assert.That(okay, Is.False);
+            Assert.That(dictionary, Is.Empty);
+        });
     }
-    
+
     [Test]
     public void RoleRemove()
     {

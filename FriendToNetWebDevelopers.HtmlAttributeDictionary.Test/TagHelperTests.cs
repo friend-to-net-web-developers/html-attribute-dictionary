@@ -29,7 +29,7 @@ namespace FriendToNetWebDevelopers.HtmlAttributeDictionary.Test
             var output = new TagHelperOutput(
                 "div",
                 [],
-                getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(result: new DefaultTagHelperContent()))
+                getChildContentAsync: (_, _) => Task.FromResult<TagHelperContent>(result: new DefaultTagHelperContent()))
             {
                 TagMode = TagMode.StartTagAndEndTag,
             };
