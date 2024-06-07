@@ -46,7 +46,8 @@ public partial class StyleAttributeDictionary : Dictionary<string, string>
         get => base[propertyName]; //This can stay default
         set
         {
-            if (!PropertyNameRegex.IsMatch(propertyName)) return;
+            if (!PropertyNameRegex.IsMatch(propertyName)) 
+                return;
             if (PropertyValueRegex.IsMatch(value))
             {
                 base[propertyName] = value;

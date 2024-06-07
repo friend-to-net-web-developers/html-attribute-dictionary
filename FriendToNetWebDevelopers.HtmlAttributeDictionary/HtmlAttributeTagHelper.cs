@@ -1,23 +1,22 @@
 ﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace FriendToNetWebDevelopers.HtmlAttributeDictionary
-{
-    /// <summary>
-    /// Allow the html-attributes attribute to be used on any html tag
-    /// </summary>
-    [HtmlTargetElement(Attributes = "html-attributes", ParentTag = null, TagStructure = (TagStructure)3)]
-    public class HtmlAttributeTagHelper : TagHelper
-    {
-        [HtmlAttributeName("html-attributes")]
-        public Dictionary<string, string> HtmlAttributes { get; init; } = [];
+namespace FriendToNetWebDevelopers.HtmlAttributeDictionary;
 
-        public override void Process(TagHelperContext context,
-            TagHelperOutput output)
+/// <summary>
+/// Allow the html-attributes attribute to be used on any html tag
+/// </summary>
+[HtmlTargetElement(Attributes = "html-attributes", ParentTag = null, TagStructure = (TagStructure)3)]
+public class HtmlAttributeTagHelper : TagHelper
+{
+    [HtmlAttributeName("html-attributes")]
+    public Dictionary<string, string> HtmlAttributes { get; init; } = [];
+
+    public override void Process(TagHelperContext context,
+        TagHelperOutput output)
+    {
+        foreach (var (key, value) in HtmlAttributes)
         {
-            foreach (var (key, value) in HtmlAttributes)
-            {
-                output.Attributes.SetAttribute(key, value);
-            }
+            output.Attributes.SetAttribute(key, value);
         }
     }
 }
