@@ -95,11 +95,3 @@ A big thank you to Joshua Hess for his initial review and contribution of the Ta
 
 I would also like to extend my gratitude to my employer, [Heartland Business Systems](https://www.hbs.net), for putting me in a position to help
  others by providing this helper library to others free of charge.  They've supported me in creating this work and share it openly with .NET Web Developers everywhere.
-
-# License Information
-
-[HTML Attribute Dictionary](https://github.com/friend-to-net-web-developers/html-attribute-dictionary)
- by [Christopher Goehrs](https://github.com/chris-goehrs) 
- through [Friend to .NET Web Developers](https://github.com/friend-to-net-web-developers) 
- is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0)
-
