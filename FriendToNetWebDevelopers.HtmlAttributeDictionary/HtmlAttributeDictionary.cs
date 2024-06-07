@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-using System.Dynamic;
+﻿using System.Dynamic;
 using System.Text.RegularExpressions;
 using System.Web;
 using FriendToNetWebDevelopers.HtmlAttributeDictionary.Models;
@@ -23,8 +22,11 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
     private const string AriaAttributePrefix = "aria-";
 
     #region Constructors
-    
-    public HtmlAttributeDictionary() { }
+
+    public HtmlAttributeDictionary()
+    {
+    }
+
     public HtmlAttributeDictionary(IDictionary<string, string> dictionary)
     {
         foreach (var (attribute, value) in dictionary)
@@ -49,11 +51,11 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
             ForceSet(attribute, value);
         }
     }
-    
+
     #endregion
 
     #region Standard Setters & Getters
-    
+
     public new string this[string attribute]
     {
         get => base[attribute]; //This can stay default
@@ -95,6 +97,7 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
     {
         return IsValidHtmlAttribute(attribute) && base.TryAdd(attribute, value);
     }
+
     #endregion
 
     #region Specialized Setters
@@ -158,7 +161,7 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
         if (ContainsKey(attribute)) Remove(attribute);
         return TryAdd(attribute, string.Empty);
     }
-    
+
     /// <summary>
     /// WARNING: Should only be used in cases where all values are already known to be safe such as cloning
     /// </summary>
@@ -168,7 +171,7 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
         => base[attribute] = value;
 
     #endregion
-    
+
     #region Id Attribute
 
     public bool SetId(string? id)
@@ -193,8 +196,8 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
     /// <param name="classes"></param>
     /// <returns></returns>
     internal bool ForceSetClasses(string? classes) => SetAttributeDiscardNullOrEmpty(ClassAttribute, classes);
-    
-    
+
+
     /// <summary>
     /// Add classes (space delimited) to the existing list of classes, validating them one at a time.
     /// </summary>
@@ -202,14 +205,14 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
     /// <returns>The number of classes added</returns>
     public uint AddClasses(string? multipleClasses)
         => string.IsNullOrWhiteSpace(multipleClasses) ? 0 : AddClasses(multipleClasses.Split(' '));
-    
+
     /// <summary>
     /// Add classes to the existing list of classes, validating them one at a time.
     /// </summary>
     /// <param name="classes"></param>
     /// <returns>The number of classes added</returns>
     public uint AddClasses(ICollection<string> classes)
-        => classes.Count == 0 ? 0 : (uint) classes.Count(AddClassToClassAttribute);
+        => classes.Count == 0 ? 0 : (uint)classes.Count(AddClassToClassAttribute);
 
     /// <summary>
     /// Safely add a single class to the classes attribute
@@ -232,8 +235,8 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
     /// <returns>ISet of class strings</returns>
     public ISet<string> GetClasses()
     {
-        return !TryGetValue(ClassAttribute, out var classesRaw) 
-            ? [] 
+        return !TryGetValue(ClassAttribute, out var classesRaw)
+            ? []
             : new SortedSet<string>(classesRaw.Split(' '));
     }
 
@@ -300,8 +303,8 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
     /// </summary>
     /// <returns></returns>
     public StyleAttributeDictionary GetStyleAttribute()
-        => TryGetValue(StyleAttribute, out var rawStyleAttribute) 
-            ? new StyleAttributeDictionary(rawStyleAttribute) 
+        => TryGetValue(StyleAttribute, out var rawStyleAttribute)
+            ? new StyleAttributeDictionary(rawStyleAttribute)
             : new StyleAttributeDictionary();
 
     /// <summary>
@@ -315,7 +318,7 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
     public Tuple<bool, int> SetStyleAttribute(StyleAttributeDictionary declarations)
         => new(SetAttributeDiscardNullOrEmpty(StyleAttribute, declarations.ToString()),
             declarations.Count);
-    
+
 
     /// <summary>
     /// Replaces the style attribute with a new set of declarations
@@ -327,7 +330,7 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
     /// </returns>
     public Tuple<bool, int> SetStyleAttribute(string? declarations)
         => SetStyleAttribute(new StyleAttributeDictionary(declarations));
-    
+
     /// <summary>
     /// Convenince method to add "display:none" to the style attribute
     /// </summary>
@@ -338,7 +341,7 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
     /// </returns>
     public Tuple<bool, uint, int> AddDisplayNoneToStyle()
         => AddToStyleAttribute("display:none;");
-    
+
     /// <summary>
     /// Adds or replaces the specified declarations to the existing style tag.
     /// </summary>
@@ -372,7 +375,7 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
         var setResults = SetStyleAttribute(atr);
         return new Tuple<bool, uint, int>(setResults.Item1, removedOkay, setResults.Item2);
     }
-    
+
     /// <summary>
     /// Removes the style attribute
     /// </summary>
@@ -381,7 +384,7 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
         => Remove(StyleAttribute);
 
     #endregion
-    
+
     #region Data Attributes Convenience Methods
 
     public bool SetData(string attributeSuffix, string? value)
@@ -397,23 +400,12 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
     public bool SetAria(string attributeSuffix, string? value)
         => SetAttributeDiscardNullOrEmpty(AriaAttributePrefix + attributeSuffix, value);
 
-    public bool RemoveAria(string attributeSuffix, string? value)
+    public bool RemoveAria(string attributeSuffix)
         => Remove(AriaAttributePrefix + attributeSuffix);
 
     #endregion
 
     #region Type Conversion Methods
-    public object ToObject()
-    {
-        ICollection<KeyValuePair<string, object?>> expandoObjCollection = new ExpandoObject();
-        foreach (var (key, value) in this)
-        {
-            expandoObjCollection.Add(new KeyValuePair<string, object?>(key, value));
-        }
-
-        dynamic eoDynamic = (ExpandoObject)expandoObjCollection;
-        return eoDynamic;
-    }
 
     public override string ToString()
     {
@@ -436,21 +428,12 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
         return list.Count == 0 ? string.Empty : string.Join(' ', list);
     }
 
-    public object Clone()
-    {
-        var clone = new HtmlAttributeDictionary();
-        foreach (var (attribute, value) in this)
-        {
-            clone.ForceSet(attribute, value);
-        }
-        return clone;
-    }
-    
+    public object Clone() => new HtmlAttributeDictionary(this);
+
     #endregion
 
-    
 
-    private static IList<string> _validHtmlAttributes = new List<string>();
+    private static List<string> _validHtmlAttributes = [];
     private static readonly Regex AttributeRegex = HtmlAttributeInternalRegex();
     private static readonly Regex IdValueRegex = HtmlIdValueInternalRegex();
     private static readonly Regex SingleClassValueRegex = HtmlSingleClassValueInternalRegex();
@@ -462,8 +445,8 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
         if (attribute.StartsWith(DataAttributePrefix) || attribute.StartsWith(AriaAttributePrefix)) return true;
         if (_validHtmlAttributes.Count == 0)
         {
-            _validHtmlAttributes = new List<string>()
-            {
+            _validHtmlAttributes =
+            [
                 "accept",
                 "accept-charset",
                 "accesskey",
@@ -633,7 +616,7 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
                 "value",
                 "width",
                 "wrap"
-            };
+            ];
         }
 
         return _validHtmlAttributes.Contains(attribute);
@@ -641,8 +624,10 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
 
     [GeneratedRegex("^[a-zA-Z][a-zA-Z0-9\\-]*[a-z-A-Z0-9]$")]
     private static partial Regex HtmlAttributeInternalRegex();
+
     [GeneratedRegex("^[a-zA-Z][a-zA-Z0-9_\\-]*[a-zA-Z0-9]$")]
     private static partial Regex HtmlIdValueInternalRegex();
+
     [GeneratedRegex("^[a-zA-Z0-9][a-zA-Z0-9_\\-]*[a-zA-Z0-9]$")]
     private static partial Regex HtmlSingleClassValueInternalRegex();
 }
