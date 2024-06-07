@@ -50,6 +50,9 @@ public class StyleTests
         var styleAttribute = new StyleAttributeDictionary(styleAttributes);
         dictionary.SetStyleAttribute(styleAttribute);
         Assert.That(dictionary["style"], Is.EqualTo("display:none;"));
+        styleAttribute["display"] = "flex";
+        dictionary.SetStyleAttribute(styleAttribute);
+        Assert.That(dictionary["style"], Is.EqualTo("display:flex;"));
     }
     
     [Test]
