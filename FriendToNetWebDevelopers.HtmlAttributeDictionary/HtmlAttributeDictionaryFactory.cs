@@ -6,24 +6,21 @@ public static class HtmlAttributeDictionaryFactory
     /// Convenience method for new HtmlAttributeDictionary
     /// </summary>
     /// <returns>new, empty HtmlAttributeDictionary</returns>
-    public static HtmlAttributeDictionary Get()
-        => new HtmlAttributeDictionary();
+    public static HtmlAttributeDictionary Get() => new();
     
     /// <summary>
     /// Convenience method for new HtmlAttributeDictionary with the preexisting dictionary of attributes safely added 
     /// </summary>
     /// <param name="dictionary">Dictionary of attributes</param>
     /// <returns>new HtmlAttributeDictionary</returns>
-    public static HtmlAttributeDictionary Get(IDictionary<string, string> dictionary)
-        => new HtmlAttributeDictionary(dictionary);
+    public static HtmlAttributeDictionary Get(IDictionary<string, string> dictionary) => new(dictionary);
     
     /// <summary>
     /// Convenience method for new HtmlAttributeDictionary with the preexisting kvp collection of attributes safely added 
     /// </summary>
     /// <param name="collection">Collection of attributes</param>
     /// <returns>new HtmlAttributeDictionary</returns>
-    public static HtmlAttributeDictionary Get(IEnumerable<KeyValuePair<string, string>> collection)
-        => new HtmlAttributeDictionary(collection);
+    public static HtmlAttributeDictionary Get(IEnumerable<KeyValuePair<string, string>> collection) => new(collection);
     
     /// <summary>
     /// Create a new HtmlAttributeDictionary with the id and classes attributes safely set
