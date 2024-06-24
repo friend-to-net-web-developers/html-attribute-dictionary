@@ -48,10 +48,7 @@ public partial class StyleAttributeDictionary : Dictionary<string, string>
         {
             if (!PropertyNameRegex.IsMatch(propertyName)) 
                 return;
-            if (PropertyValueRegex.IsMatch(value))
-            {
-                base[propertyName] = value;
-            }
+            base[propertyName] = value;
         }
     }
 
@@ -75,10 +72,7 @@ public partial class StyleAttributeDictionary : Dictionary<string, string>
     }
     
     private static readonly Regex PropertyNameRegex = CssDeclarationPropertyNameRegex();
-    private static readonly Regex PropertyValueRegex = CssDeclarationPropertyValueRegex();
     
     [GeneratedRegex(@"^[a-zA-Z\\-]+$")]
     private static partial Regex CssDeclarationPropertyNameRegex();
-    [GeneratedRegex(@"^[a-zA-Z0-9\s\.,#\-:()!%\/]+$")]
-    private static partial Regex CssDeclarationPropertyValueRegex();
 }
