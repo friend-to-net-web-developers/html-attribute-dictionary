@@ -6,6 +6,19 @@ namespace FriendToNetWebDevelopers.HtmlAttributeDictionary.Test;
 public class StyleTests
 {
     [Test]
+    public void SetStyles_BackgroundImage()
+    {
+        var dictionary = new StyleAttributeDictionary();
+        var added = dictionary.SetDeclaration(
+            "background-image:url(/media/hslfjjyj/digital-dynasty-home.jpg?width=900&height=600&v=1dac3f580b48910)");
+        Assert.Multiple(() =>
+        {
+            Assert.That(added);
+            Assert.That(dictionary, Has.Count.EqualTo(1));
+        });
+    }
+
+    [Test]
     public void SetStyles_1Valid()
     {
         var dictionary = HtmlAttributeDictionaryFactory.Get();
@@ -84,15 +97,6 @@ public class StyleTests
         Assert.That(dictionary, Is.Empty);
         dictionary["style"] = "display:none;color:#111111;";
         Assert.That(dictionary.ToString(), Is.EqualTo("style=\"display:none;color:#111111;\""));
-    }
-    
-    [Test]
-    public void SetStyles_1Valid_3Invalid_SimpleMethod()
-    {
-        var dictionary = HtmlAttributeDictionaryFactory.Get();
-        Assert.That(dictionary, Is.Empty);
-        dictionary["style"] = "display:none;#color:#111111;color:@foo;background-image:url(\"http://foo-bar.com/icon.png\");";
-        Assert.That(dictionary.ToString(), Is.EqualTo("style=\"display:none;\""));
     }
 
     [Test]
