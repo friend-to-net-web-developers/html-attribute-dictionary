@@ -9,7 +9,7 @@ namespace FriendToNetWebDevelopers.HtmlAttributeDictionary;
 public class HtmlAttributeTagHelper : TagHelper
 {
     [HtmlAttributeName("html-attributes")]
-    public Dictionary<string, string> HtmlAttributes { get; init; } = [];
+    public Dictionary<string, string> HtmlAttributes { get; set; } = [];
 
     public override void Process(TagHelperContext context,
         TagHelperOutput output)

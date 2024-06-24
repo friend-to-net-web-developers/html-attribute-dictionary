@@ -18,6 +18,8 @@ public class TagHelperTests
             HtmlAttributes = dictionary
         };
 
+        tagHelper.HtmlAttributes = dictionary;
+
         var attributes = new TagHelperAttributeList
         {
             { "html-attributes", tagHelper.HtmlAttributes }
