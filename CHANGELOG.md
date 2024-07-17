@@ -6,6 +6,10 @@
 - .Net 8.0
 - Microsoft.AspNetCore.Razor (as of 1.1.0)
 
+## 1.2.6 (2024-07-17)
+
+Expanded valid attribute list
+
 ## 1.2.5 (2024-06-24)
 
 Fixed bug where url can't be set in style attribute
