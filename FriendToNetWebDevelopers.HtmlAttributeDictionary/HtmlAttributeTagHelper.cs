@@ -8,8 +8,7 @@ namespace FriendToNetWebDevelopers.HtmlAttributeDictionary;
 [HtmlTargetElement(Attributes = "html-attributes", ParentTag = null, TagStructure = (TagStructure)3)]
 public class HtmlAttributeTagHelper : TagHelper
 {
-    [HtmlAttributeName("html-attributes")]
-    public Dictionary<string, string> HtmlAttributes { get; set; } = [];
+    [HtmlAttributeName("html-attributes")] public Dictionary<string, string> HtmlAttributes { get; set; } = [];
 
     public override void Process(TagHelperContext context,
         TagHelperOutput output)
