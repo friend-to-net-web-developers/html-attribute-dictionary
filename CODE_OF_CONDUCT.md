@@ -1,6 +1,6 @@
 ﻿# Code of Conduct
 ## Introduction
-We are committed to providing a friendly, safe, and welcoming environment for all, regardless of background, and we welcome contributions from everyone. Our community operates on principles of respect, empathy, selfless love (ἀγάπη or agápē), and mutual support. We encourage constructive engagement and focus on the well-being of the project and its members.
+We are committed to providing a friendly, safe, and welcoming environment for all, regardless of background, and we welcome contributions from everyone. Our community operates on principles of respect, empathy, and mutual support. We encourage constructive engagement and focus on the well-being of the project and its members.
 
 ## Our Standards
 Examples of behavior that contribute to creating a positive environment include:
@@ -8,8 +8,8 @@ Examples of behavior that contribute to creating a positive environment include:
 - **Using welcoming and inclusive language**
 - **Showing empathy and kindness towards others**
 - **Engaging in the Principle of Charity**: Interpreting others' statements in the most positive light possible
-  - _Note_: Learn more about the Principle of Charity [here](https://en.wikipedia.org/wiki/Principle_of_charity). 
-- **Giving and receiving constructive criticism gracefully** 
+  - _Note_: Learn more about the Principle of Charity [here](https://en.wikipedia.org/wiki/Principle_of_charity).
+- **Giving and receiving constructive criticism gracefully**
   - _Good Example_: "I appreciate your work on this feature. I noticed a potential issue with scalability and suggest we explore optimization strategies."
   - _Good Response_: "Thank you for the feedback. I'll look into the suggestions and see how they can improve the feature."
 - **Focusing on the well-being of the community and the success of the project**
@@ -23,7 +23,7 @@ Examples of **_unacceptable_** behavior by participants include:
 - **Publishing others’ private information, such as a physical or electronic address, without explicit permission**
 - **Engaging in unconstructive criticism**
   - _Bad Example_: "This code is terrible. You clearly don't know what you're doing."
-- **Responding defensively to constructive criticism** 
+- **Responding defensively to constructive criticism**
   - _Bad Example_: "Well, if you think it's so bad, why don't you fix it yourself?"
 
 ## Responsibilities
