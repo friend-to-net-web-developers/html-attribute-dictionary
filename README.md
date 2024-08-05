@@ -81,13 +81,13 @@ This keeps things simple and safe.  It even allows for data to come in from an u
 
 It even prevents invalid attributes from being added.
 
-# What if there's a problem
+## What if there's a problem
 
 Please feel free to report any issues [here](https://github.com/friend-to-net-web-developers/html-attribute-dictionary/issues) on GitHub.
 
 Include as many details as possible and one of us will check it out.
 
-# Thanks
+## Thanks
 
 A big thank you to Joshua Hess for his initial review and contribution of the Tag Helper feature.
 
@@ -95,3 +95,7 @@ A big thank you to Joshua Hess for his initial review and contribution of the Ta
 
 I would also like to extend my gratitude to my employer, [Heartland Business Systems](https://www.hbs.net), for putting me in a position to help
  others by providing this helper library to others free of charge.  They've supported me in creating this work and share it openly with .NET Web Developers everywhere.
+
+## Contributing
+
+We welcome contributions from the community! Please read our [How to Contribute](CONTRIBUTING.md) guide to get started. All contributors are expected to adhere to our [Code of Conduct](CODE_OF_CONDUCT.md).
