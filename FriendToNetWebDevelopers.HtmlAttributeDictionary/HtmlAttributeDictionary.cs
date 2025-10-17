@@ -634,7 +634,7 @@ public partial class HtmlAttributeDictionary : Dictionary<string, string>, IClon
         return _validHtmlAttributes.Contains(attribute);
     }
 
-    [GeneratedRegex("^[a-zA-Z][a-zA-Z0-9\\-]*[a-z-A-Z0-9]$")]
+    [GeneratedRegex("^[a-zA-Z][a-zA-Z0-9\\-]*[a-zA-Z0-9]$")]
     private static partial Regex HtmlAttributeInternalRegex();
 
     [GeneratedRegex("^[a-zA-Z][a-zA-Z0-9_\\-]*[a-zA-Z0-9]$")]
