@@ -90,8 +90,3 @@ Include as many details as possible and one of us will check it out.
 # Thanks
 
 A big thank you to Joshua Hess for his initial review and contribution of the Tag Helper feature.
-
-![Heartland Business Systems Logo](https://cdn-ilaepil.nitrocdn.com/lwEpTzOpowNrpEQtaopWrEAXNdUgLLes/assets/images/optimized/rev-64f2520/www.hbs.net/wp-content/uploads/2022/11/HBS-website-logo.png)
-
-I would also like to extend my gratitude to my employer, [Heartland Business Systems](https://www.hbs.net), for putting me in a position to help
- others by providing this helper library to others free of charge.  They've supported me in creating this work and share it openly with .NET Web Developers everywhere.
