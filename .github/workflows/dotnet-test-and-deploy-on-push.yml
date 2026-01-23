@@ -6,6 +6,9 @@ on:
 
 jobs:
   test:
+    permissions:
+      checks: write
+      contents: read
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
