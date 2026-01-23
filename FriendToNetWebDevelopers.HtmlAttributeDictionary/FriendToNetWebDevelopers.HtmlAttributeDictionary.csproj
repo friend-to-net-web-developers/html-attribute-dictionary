@@ -4,17 +4,17 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.2.9</Version>
+        <Version>1.3.0</Version>
         <Title>Html Attribute Dictionary</Title>
         <Authors>Christopher Goehrs via FriendToNetWebDevelopers</Authors>
         <Description>A helper for those who need to dynamically generate an html tag safely</Description>
-        <Copyright>2025</Copyright>
+        <Copyright>2026</Copyright>
         <RepositoryUrl>https://github.com/friend-to-net-web-developers/html-attribute-dictionary</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
         <PackageTags>html,attributes,tag helper</PackageTags>
         <Company>FriendToNetWebDevelopers</Company>
-        <AssemblyVersion>1.2.9</AssemblyVersion>
-        <FileVersion>1.2.9</FileVersion>
+        <AssemblyVersion>1.3.0</AssemblyVersion>
+        <FileVersion>1.3.0</FileVersion>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageIcon>icon.png</PackageIcon>
         <PackageReleaseNotes>Added ability to use on openeing tag only</PackageReleaseNotes>
