@@ -1,8 +1,22 @@
 # HTML Attribute Dictionary
+
+![NUnit](https://github.com/friend-to-net-web-developers/html-attribute-dictionary/actions/workflows/dotnet-test-and-deploy-on-push.yml/badge.svg)
+
 ## Summary
 A dictionary which extends Dictionary&lt;string,string&gt; and provides html attribute and value safety features.
 
 Some of these can change regularly.  Please see the [CHANGELOG.md](https://github.com/friend-to-net-web-developers/html-attribute-dictionary/blob/main/CHANGELOG.md) file for more details.
+
+## .NET Version Support
+This library supports the following .NET versions:
+- .NET 8.0
+- .NET 9.0
+- .NET 10.0
+
+Please note that support for **.NET 8** and **.NET 9** is planned to be dropped in the future as they reach their end-of-life. We recommend migrating to **.NET 10** or newer for continued support and security updates.
+
+## Thread Safety
+Like the standard `Dictionary<TKey, TValue>`, `HtmlAttributeDictionary` is **not thread-safe** for concurrent writes. If multiple threads might modify the dictionary simultaneously, you must implement your own synchronization or use a thread-safe alternative. It is safe for concurrent reads as long as the collection is not modified.
 
 ## Installation
 `Install-Package FriendToNetWebDevelopers.HtmlAttributeDictionary`
